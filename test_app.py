@@ -5,9 +5,9 @@ url = 'http://127.0.0.1:5000/predict'
 
 # Данные нового клиента (JSON)
 client_data = {
-    "age": 30,
-    "income": 120000,
-    "history": 1
+    "age": 10,
+    "income": 10000,
+    "history": 0
 }
 
 # Отправляем POST запрос
