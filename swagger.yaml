@@ -110,4 +110,3 @@ components:
           type: string
           description: Описание ошибки
           example: "Missing required fields"
-  
