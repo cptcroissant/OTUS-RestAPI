@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат проверки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            font-size: 24px;
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .approved {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        .probability {
+            font-size: 18px;
+            color: #666;
+            margin-top: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Результат проверки</h1>
+        <div class="result {{ 'approved' if approved else 'rejected' }}">
+            <strong>{{ 'Кредит ОДОБРЕН' if approved else 'Кредит ОТКЛОНЕН' }}</strong>
+        </div>
+        <div class="probability">
+            Вероятность одобрения: <strong>{{ probability * 100 }}%</strong>
+        </div>
+        <a href="/" class="back-button">← Проверить ещё раз</a>
+    </div>
+</body>
+</html>
