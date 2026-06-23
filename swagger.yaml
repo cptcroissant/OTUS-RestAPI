@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
   title: Credit Approval Prediction API
-  description: API для предсказания одобрения кредита на основе возраста, дохода и кредитной истории
-  version: 1.0.0
+  description: API для предсказания одобрения кредита на основе возраста, дохода и кредитной истории. Поддерживает как JSON API, так и веб-интерфейс.
+  version: 1.1.0
 
 servers:
   - url: http://localhost:5000
@@ -11,25 +11,27 @@ servers:
 paths:
   /:
     get:
-      summary: Главная страница
-      description: Приветственное сообщение сервера
+      summary: Главная страница (веб-интерфейс)
+      description: Возвращает HTML-форму для ввода данных клиента
       operationId: getHome
       responses:
         '200':
-          description: Успешный ответ
+          description: HTML страница с формой
           content:
-            application/json:
+            text/html:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Welcome to our server!"
+                type: string
+                description: HTML документ с формой ввода
 
   /predict:
     post:
       summary: Предсказание одобрения кредита
-      description: Принимает данные клиента и возвращает решение о выдаче кредита с вероятностью
+      description: |
+        Принимает данные клиента и возвращает решение о выдаче кредита.
+        
+        **Поддерживает два формата:**
+        - `application/json` - возвращает JSON ответ (для API)
+        - `application/x-www-form-urlencoded` - возвращает HTML страницу (для веб-интерфейса)
       operationId: predictCreditApproval
       requestBody:
         required: true
@@ -41,6 +43,9 @@ paths:
               age: 30
               income: 75000
               history: 1
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionRequest'
       responses:
         '200':
           description: Успешное предсказание
@@ -51,6 +56,10 @@ paths:
               example:
                 approved: true
                 probability: 0.85
+            text/html:
+              schema:
+                type: string
+                description: HTML страница с результатом предсказания
         '400':
           description: Ошибка валидации входных данных
           content:
